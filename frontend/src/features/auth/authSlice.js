@@ -11,7 +11,16 @@ const initialState = {
     message: ""
 }
 
-const authSlice = createSlice({
+// Register User
+export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
+    try {
+        return await authService.register(user)
+    } catch (error) {
+
+    }
+})
+
+export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
@@ -20,9 +29,8 @@ const authSlice = createSlice({
             state.isError = false,
             state.isSuccess = false,
             state.message = ''
-        }
+        },
     },
-    extraReducers: () => {}
 })
 
 export const {reset} = authSlice.actions
